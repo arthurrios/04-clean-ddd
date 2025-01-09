@@ -15,13 +15,17 @@ describe('Create Question', () => {
       authorId: '1',
       title: 'New question',
       content: 'Question content',
-      attachmentsIds: ['1', '2'],
+      attachmentIds: ['1', '2'],
     })
 
     expect(result.isRight()).toBe(true)
     expect(inMemoryQuestionsRepository.items[0]).toEqual(result.value?.question)
-    expect(inMemoryQuestionsRepository.items[0].attachments).toHaveLength(2)
-    expect(inMemoryQuestionsRepository.items[0].attachments).toEqual([
+    expect(
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
+    ).toHaveLength(2)
+    expect(
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
+    ).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
     ])
